@@ -37,7 +37,11 @@ The **Control Name Standards** screen allows you to configure and verify the nam
 
 <br>
 
-The Canvas App Selection screen provides a list of available apps from the environment. Choose the app to run validation against, ensuring that code and naming standards are applied to the correct project.
+**Download a copy** of your canvas app from Save option from your environment.
+
+![Download a copy](images/screen3a.png)
+
+Choose the msapp file downloaded to run validation against, ensuring that code and naming standards are applied to the correct project.
 
 ![Canvas App Selection](images/screen3.png)
 
