@@ -23,6 +23,18 @@ The **Control Name Standards** screen allows you to configure and verify the nam
  
 ![Control Name Standards](images/screen2.png)
 
+- **Reset**  
+  Clears the current validation results and overwrites previously saved data with the default configuration included when the extension was installed.  Useful for starting fresh or discarding any custom changes.
+
+- **Download**  
+  Exports the current naming standards or validation results into a JSON file.  This makes it easy to share configurations across projects or store them in source control.
+
+- **Upload**  
+  Allows importing a JSON configuration file containing naming standards.  This helps teams apply the same validation rules consistently across multiple environments.
+
+- **Save**  
+  Persists the updated standards or validation configurations within the tool.  Ensures that changes are retained and applied during future validations.
+
 <br>
 
 The Canvas App Selection screen provides a list of available apps from the environment. Choose the app to run validation against, ensuring that code and naming standards are applied to the correct project.
@@ -40,6 +52,14 @@ View list of all the screens contained within the selected Canvas App.  This pro
 The Control Details displays all controls and their associated formulas within the selected screen.  This allows users to validate control naming conventions and verify code consistency according to project standards.
 
 ![Control Details](images/screen5.png)
+
+- **Show Status = False**
+
+    This action filters the table to display only child rows where the `status` field is set to `false`.  It helps quickly identify controls or variables that do not meet the project standards, making inconsistencies easy to spot and correct.
+
+    - Applies the filter only to **child rows**; parent rows remain visible to preserve the app hierarchy.  
+    - Clicking the button again **clears the filter**, restoring the full view.  
+    - The button changes appearance to indicate when the filter is active, providing visual feedback to the user.
 
 <br>
 
@@ -74,24 +94,5 @@ Users appreciate release notes as you update your extension.
 
 Initial release of ...
 
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
 
 **Enjoy!**
