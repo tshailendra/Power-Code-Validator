@@ -1,0 +1,66 @@
+{
+  "name": "powercodevalidator",
+  "displayName": "powercodevalidator",
+  "description": "",
+  "publisher": "ShailendraTurlapati",
+  "version": "0.0.9",
+  "files": [
+    "out",
+    "media",
+    "node_modules",
+    "README.md",
+    "LICENSE.md"
+  ],
+  "engines": {
+    "vscode": "^1.86.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tshailendra/Power-Code-Validator.git"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "powercodevalidator.validatecode",
+        "title": "Power Code Validator"
+      }
+    ],
+    "configuration": {
+      "properties": {
+        "powercodevalidator.enableLogging": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable debug logging for Code Validator."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run check-logging && npm run compile",
+    "check-logging": "node media/js/custom/check-logging.js",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.17.2",
+    "@types/vscode": "^1.1.37",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.32.0",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "unzipper": "^0.12.3"
+  }
+}

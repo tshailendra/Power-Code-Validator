@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PowerApps Code Validator</title>
+    <link href="/css/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/custom.css" rel="stylesheet" />
+    <link href="/css/tabulator.min.css" rel="stylesheet" />
+</head>
+
+
+<body class="p-4">
+    <div class="mb-4">
+        <div class="d-flex align-items-center">
+            <img src="/img/PowerApps.svg" alt="Power Apps" width="50" height="50" style="padding: 10px;" />
+            <h2 class="mb-0">Power Code Validator</h2>
+        </div>
+        <p class="text-muted fst-italic" style="font-size: 0.65rem; margin-left: 50px; margin-top: -10px;">
+            Smart validation for cleaner, reliable code
+        </p>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div class="accordion" id="accordionExample" style="width: 90%;">
+            <!-- Item 1 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="sectionOne">
+                    <button id="btnSectionOne" class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false"
+                        aria-controls="collapseOne">
+                        Control Naming Conventions
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="sectionOne"
+                    data-bs-parent="#accordionExample">
+                    <!-- Right-aligned Save Button -->
+                    <div class="accordion-body">
+                        <div class="d-flex justify-content-end">
+                            <button id="btnReset" class="btn btn-outline-danger border border-danger mt-3 me-3"
+                                style="width: 95px;">Reset</button>
+                            <button id="btnDownload" class="btn btn-light border border-dark mt-3 me-3"
+                                style="width: 95px;">Download</button>
+                            <button id="btnUpload" class="btn btn-warning border border-dark mt-3 me-3"
+                                style="width: 95px;">Upload</button>
+                            <button id="btnSave" class="btn btn-primary border border-dark mt-3" style="width: 95px;">Save</button>
+                        </div>
+                        <br>
+                        <div id="tblNamingStandards"></div>
+                        <label id="lastupdate" class="form-label"></label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="sectionTwo">
+                    <button id="btnSectionTwo" class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        Canvas App
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="sectionTwo"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <h5>Please upload Canvas App (*.msapp file)</h5>
+                        <label id="filename" class="form-label">No File Selected</label><br>
+                        <button type="button" id="btnUploadMSApp" class="btn btn-primary">Upload</button>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Item 3 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="sectionThree">
+                    <button id="btnSectionThree" class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
+                        aria-controls="collapseThree">
+                        App Screens
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="sectionThree"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div id="tblAppScreens"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="sectionFour">
+                    <button id="btnSectionFour" class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
+                        aria-controls="collapseFour">
+                        Control Details
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="sectionFour"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div id="screendetails" class="container">
+                            <div class="d-flex justify-content-end gap-2 mb-3">
+                                <button id="btnCtrlFilter" class="btn btn-danger">Show Status = false</button>
+                            </div>
+                            <div id="treeBody"></div>
+                            <br />
+                            <h6 id="title" class="form-label"></h6>
+                            <label id="script" class="form-label d-block"
+                                style="display:block; height:100px;white-space:pre-line;overflow-y:auto; border:1px solid #dee2e6; padding:5px;">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--common script-->
+
+    <script src="/js/common/jquery-3.7.1.min.js"></script>
+    <script src="/js/common/jquery-ui.min.js"></script>
+    <script src="/js/common/tabulator.min.js"></script>
+    <script src="/js/common/bootstrap.bundle.min.js"></script>
+
+    <!--custom script-->
+    <script src="/js/custom/controls.js"></script>
+    <script src="/js/custom/panel.js"></script>
+    <script src="/js/custom/globalvariables.js"></script>
+    <script src="/js/custom/panelwinlistener.js"></script>
+    <script src="/js/custom/treeview.js"></script>
+    <script>
+        const vscode = acquireVsCodeApi();
+        var sectionTwo = 'Canvas App';
+        var sectionOne = 'Control Naming Conventions';
+        var sectionThree = 'App Screens';
+        var sectionFour = 'Screen Details';
+
+    </script>
+</body>
+
+</html>

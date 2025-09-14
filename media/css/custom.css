@@ -1,0 +1,41 @@
+/* Expanded accordion background */
+.accordion-button:not(.collapsed) {
+  background-color: lavender !important;
+  color: #000 !important;
+  /* keep text readable */
+}
+
+/* Collapsed accordion on hover */
+.accordion-button.collapsed:hover {
+  background-color: lavender !important;
+  color: #000 !important;
+}
+
+/* Optional: focus outline (instead of blue glow) */
+.accordion-button:focus {
+  box-shadow: 0 0 0 0.25rem rgba(230, 230, 250, 0.6);
+}
+
+/*tabulator parent node*/
+/* style the whole root row by targeting its cells (higher specificity) */
+.tabulator .tabulator-row.tabulator-tree-level-0 .tabulator-cell {
+  background-color: #f1be5f !important;
+  font-weight: 500 !important;
+  font-size: 1.1rem !important;
+}
+
+/* ensure the row element itself has no competing bg */
+.tabulator .tabulator-row.tabulator-tree-level-0 {
+  background-color: transparent !important;
+}
+
+/* override cells in selected row */
+/* Highlight any selected row in Tabulator red */
+.tabulator .tabulator-row.tabulator-selected .tabulator-cell {
+  background: #ea7242 !important;
+  color: #f1f1f1 !important;
+}
+
+.tabulator .tabulator-col .tabulator-col-title {
+  text-align: center;
+}
