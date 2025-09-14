@@ -95,5 +95,10 @@ This extension contributes the following settings:
 
 Initial release.
 
+## 1.0.1
+
+Revised README with instructions on downloading a copy of the canvas file and uploading it.
+
+
 
 **Enjoy!**
