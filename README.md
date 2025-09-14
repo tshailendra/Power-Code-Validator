@@ -8,7 +8,40 @@ Power Code Validator is a Visual Studio Code extension that helps enforce naming
 - ⚡ Provides quick feedback directly inside VS Code
 - 📂 Customizable configuration for project-specific naming rules
 - 🚀 Helps maintain consistency and best practices across large Canvas Apps
-- 📊 Reduces manual code review effort by automating validations
+- 📊 Reduces manual code review effort by automating validations 
+
+
+## Code Validation in Action
+
+The Power Code Validator makes it easy to identify naming and coding standard issues in your Canvas Apps.  From the main screen, you can quickly review all controls, variables, and prefixes against the configured project standards.
+
+![initialscreen](images/screen1.png)
+
+<br>
+
+The **Control Name Standards** screen allows you to configure and verify the naming prefixes used for each control type in your Canvas Apps.  By maintaining consistent prefixes, your project remains clean, standardized, and easier to maintain.
+ 
+![Control Name Standards](images/screen2.png)
+
+<br>
+
+The Canvas App Selection screen provides a list of available apps from the environment. Choose the app to run validation against, ensuring that code and naming standards are applied to the correct project.
+
+![Canvas App Selection](images/screen3.png)
+
+<br>
+
+View list of all the screens contained within the selected Canvas App.  This provides a clear overview of the app structure, helping users navigate through screens and apply validations at the correct level.
+
+![App Screens](images/screen4.png)
+
+<br>
+
+The Control Details displays all controls and their associated formulas within the selected screen.  This allows users to validate control naming conventions and verify code consistency according to project standards.
+
+![Control Details](images/screen5.png)
+
+<br>
 
 
 ## Runtime Dependency
