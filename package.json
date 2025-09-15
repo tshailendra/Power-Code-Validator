@@ -1,9 +1,9 @@
 {
   "name": "powercodevalidator",
-  "displayName": "powercodevalidator",
-  "description": "",
+  "displayName": "Power Code Validator",
+  "description": "Automatically checks your app for consistency, ensuring controls, variables, and prefixes follow project-specific rules",
   "publisher": "ShailendraTurlapati",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "icon": "media/img/logo.png",
   "files": [
     "out",

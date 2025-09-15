@@ -106,7 +106,7 @@ function buildTreeTable(container, rootNode) {
             { title: "Script", field: "script", widthGrow: 2, headerSort: false },
             { title: "Remarks", field: "remarks", widthGrow: 3, headerSort: false },
             {
-                title: "Status", field: "status", widthGrow: 1, hozAlign: "center",
+                title: "Status", field: "status", widthGrow: 1, headerSort: false, hozAlign: "center",
                 headerFilter: "select", // dropdown filter
                 headerFilterParams: { "true": "True", "false": "False" },
                 formatter: (cell) => {
