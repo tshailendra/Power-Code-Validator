@@ -12,3 +12,7 @@
 - 1.0.2
 
   Removed sort for Status column in Control Details
+
+- 1.0.3
+
+  Added filter for Cotrol column in Control Details

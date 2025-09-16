@@ -1,6 +1,6 @@
 // listen for extension messages
 window.addEventListener("message", (event) => {
-    const { type, payload } = event.data;
+    const { type, payload, templateNames } = event.data;
 
     if (type === "initFiles") {
         $("#btnSectionTwo").text(sectionTwo + " - " + payload.fileName);
@@ -15,7 +15,7 @@ window.addEventListener("message", (event) => {
         $('#filename').text(payload);
     }
     else if (type === "controlTree") {
-        buildTreeTable("#treeBody", payload);
+        buildTreeTable("#treeBody", payload, templateNames);
     }
     else if (type === "setNameStandards") {
         initTblNameStandards("tblNamingStandards", payload);

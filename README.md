@@ -13,53 +13,56 @@ Power Code Validator is a Visual Studio Code extension that helps enforce naming
 
 ## Code Validation in Action
 
-The Power Code Validator makes it easy to identify naming and coding standard issues in your Canvas Apps.  From the main screen, you can quickly review all controls, variables, and prefixes against the configured project standards.
+   prefixes against the configured project standards.
 
-![initialscreen](images/screen1.png)
+  ![initialscreen](images/screen1.png)
 
-<br>
+  ### Control Name Standards
 
-The **Control Name Standards** screen allows you to configure and verify the naming prefixes used for each control type in your Canvas Apps.  By maintaining consistent prefixes, your project remains clean, standardized, and easier to maintain.
+  The **Control Name Standards** screen allows you to configure and verify the naming prefixes used for each control type in your Canvas Apps.  By maintaining consistent prefixes, your project remains clean, standardized, and easier to maintain.
  
-![Control Name Standards](images/screen2.png)
+  ![Control Name Standards](images/screen2.png)
 
-- **Reset**  
+  - **Reset**  
   Clears the current validation results and overwrites previously saved data with the default configuration included when the extension was installed.  Useful for starting fresh or discarding any custom changes.
 
-- **Download**  
+  - **Download**  
   Exports the current naming standards or validation results into a JSON file.  This makes it easy to share configurations across projects or store them in source control.
 
-- **Upload**  
+  - **Upload**  
   Allows importing a JSON configuration file containing naming standards.  This helps teams apply the same validation rules consistently across multiple environments.
 
-- **Save**  
+  - **Save**  
   Persists the updated standards or validation configurations within the tool.  Ensures that changes are retained and applied during future validations.
 
-<br>
+  ### Canvas App
 
-**Download a copy** of your canvas app from Save option from your environment.
+  **Download a copy** of your canvas app from Save option from your environment.
 
-![Download a copy](images/screen3a.png)
+  ![Download a copy](images/screen3a.png)
 
-Choose the msapp file downloaded to run validation against, ensuring that code and naming standards are applied to the correct project.
+  Choose the msapp file downloaded to run validation against, ensuring that code and naming standards are applied to the correct project.
 
-![Canvas App Selection](images/screen3.png)
+   ![Canvas App Selection](images/screen3.png)
 
-<br>
 
-View list of all the screens contained within the selected Canvas App.  This provides a clear overview of the app structure, helping users navigate through screens and apply validations at the correct level.
+  ### App Screens
+  View list of all the screens contained within the selected Canvas App.  This provides a clear overview of the app structure, helping users navigate through screens and apply validations at the correct level.
 
-![App Screens](images/screen4.png)
+  ![App Screens](images/screen4.png)
 
-<br>
+  ### Control Details
+  The Control Details displays all controls and their associated formulas within the selected screen.  This allows users to validate control naming conventions and verify code consistency according to project standards.
 
-The Control Details displays all controls and their associated formulas within the selected screen.  This allows users to validate control naming conventions and verify code consistency according to project standards.
+  ![Control Details](images/screen5.png)
 
-![Control Details](images/screen5.png)
+  - **Select Control**
 
-- **Show Status = False**
+    This action filters the table to display only child rows where the `Control` field is set to value in Select Contorl dropdown.
 
-    This action filters the table to display only child rows where the `status` field is set to `false`.  It helps quickly identify controls or variables that do not meet the project standards, making inconsistencies easy to spot and correct.
+  - **Show Status = False**
+
+      This action filters the table to display only child rows where the `Status` field is set to `false`.  It helps quickly identify controls or variables that do not meet the project standards, making inconsistencies easy to spot and correct.
 
     - Applies the filter only to **child rows**; parent rows remain visible to preserve the app hierarchy.  
     - Clicking the button again **clears the filter**, restoring the full view.  
@@ -102,6 +105,10 @@ This extension contributes the following settings:
 - 1.0.2
 
   Removed sort for Status column in Control Details
+
+- 1.0.3
+
+  Added filter for Cotrol column in Control Details
   
 
 

@@ -82,7 +82,27 @@ function initTblAppScreens(tableId, payload, targetFolder) {
 }
 
 let tableControlTree = null;
-function buildTreeTable(container, rootNode) {
+function buildTreeTable(container, rootNode, templateNames) {
+
+    const $select = $("#ddcontrolType");
+
+    // Clear existing options
+    $select.empty();
+
+    // Add default option
+    $select.append($('<option>', {
+        value: "",
+        text: "--Filter--",
+        selected: true,
+        disabled: true
+    }));
+
+
+    $.each(templateNames, function (index, type) {
+        $("#ddcontrolType").append(
+            $("<option>", { value: type, text: type })
+        );
+    });
 
     const $tbody = $(container);
     $tbody.empty();
@@ -178,6 +198,16 @@ $("#btnCtrlFilter").on("click", function () {
     }
 });
 
+$("#ddcontrolType").on("change", function () {
+    const selectedValue = $(this).val();
+    if (tableControlTree) {
+        tableControlTree.setFilter(function (data) {
+            return hasChildWithControl(data, selectedValue);
+        });
+    }
+    // filterControlsByType(selectedValue);
+});
+
 function hasChildWithStatusFalse(node) {
     // If this node itself has status and it's false
     if (node.status === false || node.status === "false") {
@@ -187,6 +217,24 @@ function hasChildWithStatusFalse(node) {
     // If it has children, check each one recursively
     if (Array.isArray(node._children)) {
         return node._children.some(child => hasChildWithStatusFalse(child));
+    }
+
+    return false;
+}
+
+function hasChildWithControl(node, templateName) {
+    // If filter is cleared (== "" or "--Filter--"), always return true
+    if (!templateName || templateName === "--Filter--") {
+        return true;
+    }
+    // If this node itself has the control and it matches
+    if (node.templateName === templateName) {
+        return true;
+    }
+
+    // If it has children, check each one recursively
+    if (Array.isArray(node._children)) {
+        return node._children.some(child => hasChildWithControl(child, templateName));
     }
 
     return false;

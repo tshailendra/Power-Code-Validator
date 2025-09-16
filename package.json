@@ -3,7 +3,7 @@
   "displayName": "Power Code Validator",
   "description": "Automatically checks your app for consistency, ensuring controls, variables, and prefixes follow project-specific rules",
   "publisher": "ShailendraTurlapati",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "icon": "media/img/logo.png",
   "files": [
     "out",

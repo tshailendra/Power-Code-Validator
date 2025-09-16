@@ -44,7 +44,8 @@
                                 style="width: 95px;">Download</button>
                             <button id="btnUpload" class="btn btn-warning border border-dark mt-3 me-3"
                                 style="width: 95px;">Upload</button>
-                            <button id="btnSave" class="btn btn-primary border border-dark mt-3" style="width: 95px;">Save</button>
+                            <button id="btnSave" class="btn btn-primary border border-dark mt-3"
+                                style="width: 95px;">Save</button>
                         </div>
                         <br>
                         <div id="tblNamingStandards"></div>
@@ -104,7 +105,11 @@
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <div id="screendetails" class="container">
-                            <div class="d-flex justify-content-end gap-2 mb-3">
+                            <div class="d-flex justify-content-end align-items-center gap-2 mb-3">
+                                <label for="ddcontrolType" class="form-label mb-0">Select Control</label>
+                                <select class="form-select" id="ddcontrolType" style="width: 200px;">
+                                    <option value="">--Filter--</option>
+                                </select>
                                 <button id="btnCtrlFilter" class="btn btn-danger">Show Status = false</button>
                             </div>
                             <div id="treeBody"></div>

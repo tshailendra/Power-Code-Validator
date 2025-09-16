@@ -99,7 +99,8 @@ export function activate(context: vscode.ExtensionContext) {
 					else if (message.type === "getControlTree") {
 						const filePath = path.join(`${message.filePath}`, 'Processed', `${message.screenName}.json`);
 						const data = await readData(filePath);
-						currentPanel?.webview.postMessage({ type: "controlTree", payload: data });
+						const templateNames = collectTemplateNames(data);
+						currentPanel?.webview.postMessage({ type: "controlTree", payload: data, templateNames });
 					}
 					// Handle saving of naming standards data
 					else if (message.type === "saveNameStandards") {
@@ -186,4 +187,18 @@ function getWebviewContent(context: vscode.ExtensionContext, panel: vscode.Webvi
 	});
 
 	return html;
+}
+
+function collectTemplateNames(node: any, result: any = []) {
+	if (node.templateName) {
+		result.push(node.templateName);
+	}
+
+	if (Array.isArray(node._children)) {
+		node._children.forEach((child: any) => collectTemplateNames(child, result));
+	}
+
+	// Remove duplicates with Set, then sort
+	return [...new Set(result)].sort((a, b) => String(a).localeCompare(String(b)));
+
 }
