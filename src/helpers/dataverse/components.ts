@@ -21,7 +21,7 @@ export async function getComponentsFromSolutions(envURL: string, solutionid: str
             columns: string | ""
         }[];
     };
-    const records = data.value.map((item: any) => {
+    const allRecords = data.value.map((item: any) => {
         // Find the matching component type in JSON by ID
         const compMeta = componentTypes.find((c: any) => c.ID === String(item.componenttype));
 
@@ -37,6 +37,8 @@ export async function getComponentsFromSolutions(envURL: string, solutionid: str
             childcolumns: compMeta && compMeta.ChildColumns ? compMeta.ChildColumns : null
         };
     });
+
+    const records = allRecords.filter(r => r.DisplayName?.trim() !== "");
 
     // Group by DisplayName
     const groupedData = Object.values(
