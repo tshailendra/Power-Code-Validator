@@ -66,14 +66,53 @@
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <h5>Please upload Canvas App (*.msapp file)</h5>
+                        <div class="btn-group" role="group" aria-label="Data Source Selection">
+                            <!-- Local option -->
+                            <input type="radio" class="btn-check" name="dataSource" id="localOption" value="Local"
+                                autocomplete="off" checked>
+                            <label class="btn btn-outline-primary" for="localOption"
+                                style="width: 120px; text-align: center;">
+                                Local
+                            </label>
+                            <input type="radio" class="btn-check" name="dataSource" id="dataverseOption"
+                                value="Dataverse" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="dataverseOption"
+                                style="width: 120px; text-align: center;">
+                                Dataverse
+                            </label>
+                        </div>
+                        <br /><br />
+                        <div id="dataverseSection" class="mb-3">
+                            <label for="envUrl" class="form-label">Environment URL</label>
+                            <input type="text" class="form-control" id="envUrl"
+                                placeholder="https://yourorg.crm.dynamics.com" />
+                            <br />
+                            <input type="text" class="form-control" id="solutionid"
+                                placeholder="solutionid: <<47707ff8-047b-f011-b4cc-6045bde789a5>>" />
+                        </div>
                         <label id="filename" class="form-label">No File Selected</label><br>
-                        <button type="button" id="btnUploadMSApp" class="btn btn-primary">Upload</button>
-
+                        <button type="button" id="btnUploadMSApp" style="width: 120px;"
+                            class="btn btn-primary">Upload</button>
                     </div>
                 </div>
             </div>
 
-
+            <!-- Item 5 -->
+            <div class="accordion-item" id="accordionDataverse">
+                <h2 class="accordion-header" id="sectionFive">
+                    <button id="btnSectionFive" class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false"
+                        aria-controls="collapseFive">
+                        Solution Components
+                    </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="sectionFive"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div id="tblComponents"></div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Item 3 -->
             <div class="accordion-item">
@@ -144,6 +183,8 @@
         var sectionOne = 'Control Naming Conventions';
         var sectionThree = 'App Screens';
         var sectionFour = 'Screen Details';
+
+        $("#dataverseSection").hide();
 
     </script>
 </body>

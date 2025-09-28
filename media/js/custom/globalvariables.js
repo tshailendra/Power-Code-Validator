@@ -1,6 +1,15 @@
 const appsettings = {
   workingFolder: "",
-  controlNameConventions: []
+  controlNameConventions: [],
+  token: ""
 };
 
 window.appSettings = appsettings;
+
+
+const localsettings = {
+  url: "",
+  solutionid: ""
+}
+
+window.localSettings = localsettings;

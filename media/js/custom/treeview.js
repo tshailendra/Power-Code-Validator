@@ -38,6 +38,44 @@ function initTblNameStandards(tableId, payload) {
     });
 }
 
+let tableComponents = null;
+function initTblComponents(tableId, payload) {
+    var existing = Tabulator.findTable("#" + tableId)[0];
+    if (existing) {
+        existing.destroy();
+    }
+    // Initialize only if no Tabulator is bound yet
+    tableComponents = new Tabulator("#" + tableId, {
+        layout: "fitColumns",
+        height: "500px",
+        headerSort: false,
+        selectable: true,  // allow row selection
+        dataTree: true,
+        dataTreeStartExpanded: false,
+        placeholder: "No Data Available",
+        columnDefaults: {
+            resizable: false
+        },
+        data: payload,
+        columns: [
+            { title: "Display Name", field: "DisplayName", headerSort: false },
+            { title: "Logical Name", field: "LogicalName", headerSort: false },
+            { title: "Schema Name", field: "SchemaName", headerSort: false },
+            { title: "Description", field: "Description", headerSort: false },
+            { title: "Remarks", field: "Remarks", hozAlign: "center", headerSort: false },
+            { title: "ID", field: "id", visible: false, hozAlign: "center", headerSort: false },
+            { title: "ObjectID", field: "objectid", visible: false, hozAlign: "center", headerSort: false },
+            { title: "Prefix", field: "PublisherPrefix", visible: false, hozAlign: "center", headerSort: false },
+        ]
+    });
+
+    tableComponents.on("rowClick", function (e, row) {
+        tableComponents.getSelectedRows().forEach(r => r.deselect());
+        row.select(true);
+    });
+}
+
+
 function initTblAppScreens(tableId, payload, targetFolder) {
     appsettings.workingFolder = targetFolder;
     var existing = Tabulator.findTable("#" + tableId)[0];

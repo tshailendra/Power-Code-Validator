@@ -6,7 +6,15 @@ $(document).ready(function () {
     $('#btnUploadMSApp').click(function () {
         clearControls();
         clearAppScreens("tblAppScreens");
-        vscode.postMessage({ type: 'uploadMSAppFile' });
+        let selectedValue = $('input[name="dataSource"]:checked').val();
+        if (selectedValue === "Local") {
+            vscode.postMessage({ type: 'uploadMSAppFile' });
+        }
+        else if (selectedValue === "Dataverse") {
+            let envUrl = $("#envUrl").val().trim();
+            let solutionid = $("#solutionid").val().trim();
+            vscode.postMessage({ type: 'getComponentList', envUrl, solutionid });// get tables and store in local variable
+        }
     });
 
     // expose globally
@@ -73,8 +81,47 @@ $(document).ready(function () {
         vscode.postMessage({ type: 'uploadControlNameFile' });
     });
 
+    $('input[name="dataSource"]').on('change', function () {
+        let selectedValue = $('input[name="dataSource"]:checked').val();
 
+        if (selectedValue === "Local") {
+            $("#filename").show();
+            $("#btnUploadMSApp").prop("disabled", false);
+            $("#dataverseSection").hide();
+            $("#accordionDataverse").hide();
+            $("#btnUploadMSApp").text("Upload");
+        }
+        else if (selectedValue === "Dataverse") {
+            $("#filename").hide();
+            $("#dataverseSection").show();
+            $("#accordionDataverse").show();
+            $("#btnUploadMSApp").text("Get");
+            if ($("#envUrl").val().trim() === "") {
+                $("#btnUploadMSApp").prop("disabled", true);
+            } else {
+                $("#btnUploadMSApp").prop("disabled", false);
+            }
+        }
+    });
 
+    $("#envUrl").on("input", function () {
+        let selectedValue = $('input[name="dataSource"]:checked').val();
+        if (selectedValue === "Local") {
+            $("#btnUploadMSApp").prop("disabled", false);
+            $("#accordionDataverse").hide();
+            return;
+        }
+
+        let value = $(this).val().trim();
+        if (value === "") {
+            $("#btnUploadMSApp").prop("disabled", true);
+        } else {
+            $("#btnUploadMSApp").prop("disabled", false);
+        }
+    });
+
+    // Run once at page load in case the field starts empty
+    $("#envUrl").trigger("input");
 
     // document.ready end    
 });

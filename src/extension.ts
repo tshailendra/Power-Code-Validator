@@ -2,13 +2,16 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import { Logger } from './helpers/logger';
-import { uploadMSAppFile, readData, getNamingStandards, saveNameStandardsData, downloadControlNameFile, uploadControlNameFile, resetNameStandards } from './helpers/storage';
-import { FileStore } from './helpers/filestore';
-import { processFiles } from './helpers/fileprocess';
+import { uploadMSAppFile, readAppData, getNamingStandards, saveNameStandardsData, downloadControlNameFile, uploadControlNameFile, resetNameStandards } from './helpers/canvasapp/uploadapp';
+import { FileStore } from './helpers/canvasapp/filestore';
+import { processFiles } from './helpers/canvasapp/fileprocess';
+import { login } from './login/loginWithBrowser';
+import { getComponentsFromSolutions } from './helpers/dataverse/components';
+import { readData, saveData } from './helpers/storage/localstorage';
+import { exportSolution } from './helpers/dataverse/extractcanvasapp';
 
 let currentPanel: vscode.WebviewPanel | undefined;
 const filestore = new FileStore();
-
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -52,6 +55,11 @@ export function activate(context: vscode.ExtensionContext) {
 				currentPanel = undefined;
 			}, null, context.subscriptions);
 
+			// Load local settings if available
+			const localSettings = getLocalSettings(context);
+			if (localSettings) {
+				currentPanel?.webview.postMessage({ type: 'setLocalSettings', payload: localSettings });
+			}
 			// Send naming standards data to the webview
 			const output = getNamingStandards(context, false);
 			currentPanel?.webview.postMessage({ type: 'setNameStandards', payload: output, });
@@ -91,6 +99,26 @@ export function activate(context: vscode.ExtensionContext) {
 							vscode.window.showErrorMessage('Selected file is not a valid JSON file');
 						}
 					}
+					else if (message.type === 'getComponentList') {
+						const envUrl = message.envUrl;
+						const solutionid = message.solutionid;
+						const resettoken = true;
+						const accessToken = await login(envUrl, "", "", resettoken);
+						const data = accessToken.token.includes("Error") ? accessToken : "Connected";
+						currentPanel?.webview.postMessage({ type: 'setDVConnStatus', payload: data });
+						if (!accessToken.token.includes("Error")) {
+							// Fetch Dataverse tables and local storage files	
+							saveData(context, 'localsettings.json', { envUrl, solutionid });
+							const components = await getComponentsFromSolutions(envUrl, solutionid, accessToken.token);
+							currentPanel?.webview.postMessage({ type: 'setComponentList', payload: components, text: 'Tables fetched successfully' });
+							if (components.length === 1) {
+								//TODO: await exportSolution(context, envUrl, accessToken.token, solutionid);
+							}
+							
+						} else {
+							accessToken.token = "";
+						}
+					}
 					// Handle file clicked event
 					else if (message.type === "fileClicked") {
 						vscode.window.showInformationMessage(`You clicked ${message.file}`);
@@ -98,7 +126,7 @@ export function activate(context: vscode.ExtensionContext) {
 					// Handle request to get control tree data
 					else if (message.type === "getControlTree") {
 						const filePath = path.join(`${message.filePath}`, 'Processed', `${message.screenName}.json`);
-						const data = await readData(filePath);
+						const data = await readAppData(filePath);
 						const templateNames = collectTemplateNames(data);
 						currentPanel?.webview.postMessage({ type: "controlTree", payload: data, templateNames });
 					}
@@ -201,4 +229,9 @@ function collectTemplateNames(node: any, result: any = []) {
 	// Remove duplicates with Set, then sort
 	return [...new Set(result)].sort((a, b) => String(a).localeCompare(String(b)));
 
+}
+
+function getLocalSettings(context: any): any {
+	const data = readData(context, 'localsettings.json');
+	return data;
 }

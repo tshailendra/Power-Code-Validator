@@ -1,0 +1,23 @@
+[
+{"ID": "1", "Value": "Entity", "ApiUrl": "/EntityDefinitions({value})","Columns":"?$select=MetadataId,LogicalName,DisplayName,Description,OwnershipType,SchemaName","ExpandColumns": "&$expand=Attributes($select=LogicalName,SchemaName,AttributeType,DisplayName,IsCustomAttribute;$filter=IsCustomAttribute eq true)","ChildColumns": ""},
+{"ID": "2", "Value": "Attribute", "ApiUrl": "/attributes({value})"},
+{"ID": "3", "Value": "Relationship", "ApiUrl": "/relationships({value})"},
+{"ID": "4", "Value": "Attribute Picklist Value", "ApiUrl": "/attributepicklistvalues({value})"},
+{"ID": "5", "Value": "Attribute Lookup Value", "ApiUrl": "/attributelookupvalues({value})"},
+{"ID": "6", "Value": "View Attribute", "ApiUrl": "/viewattributes({value})"},
+{"ID": "9", "Value": "Option Set", "ApiUrl": "/GlobalOptionSetDefinitions({value})","Columns":"", "ChildColumns": ""},
+{"ID": "20", "Value": "Security Roles", "ApiUrl": "/roles({value})","Columns": "?$select=name,roleid"},
+{"ID": "29", "Value": "Workflow", "ApiUrl": "/workflows({value})","Columns":"?$select=name,runas,clientdata,workflowid,description","ChildColumns": ""},
+{"ID": "46", "Value": "Entity Map", "ApiUrl": "/entitymaps({value})"},
+{"ID": "60", "Value": "System Form", "ApiUrl": "/systemforms({value})"},
+{"ID": "61", "Value": "Web Resource", "ApiUrl": "/webresources({value})"},
+{"ID": "62", "Value": "Site Map", "ApiUrl": "/sitemaps({value})","Columns":"?$select=sitemapid,sitemapname,sitemapnameunique,sitemapxml"},
+{"ID": "80", "Value": "Model Driven App", "ApiUrl": "/appmodules({value})","Columns":"?$select=appmoduleid,uniquename,name,description"},
+{"ID": "90", "Value": "Plugin Type", "ApiUrl": "/plugintypes({value})"},
+{"ID": "91", "Value": "Plugin Assembly", "ApiUrl": "/pluginassemblys({value})"},
+{"ID": "300", "Value": "Canvas App", "ApiUrl": "/canvasapps({value})", "Columns":"?$select=displayname,description,canvasappid,name","ChildColumns":[]},
+{"ID": "371", "Value": "Connector", "ApiUrl": "/connectors({value})"},
+{"ID": "372", "Value": "Connector (Custom Connector)", "ApiUrl": "/connector(customconnector)s({value})"},
+{"ID": "380", "Value": "Environment Variable Value", "ApiUrl": "/environmentvariablevalues?$filter=_environmentvariabledefinitionid_value eq {value}","Columns":"&$select=environmentvariablevalueid,value,schemaname","ExpandColumns":"&$expand=EnvironmentVariableDefinitionId($select=environmentvariabledefinitionid,schemaname,displayname,description,defaultvalue)","ChildColumns":""},
+{"ID": "10129", "Value": "Connection Reference", "ApiUrl": "/connectionreferences({value})","Columns": "?$select=connectionreferenceid,connectionreferencedisplayname,description,connectionreferencelogicalname"}
+]

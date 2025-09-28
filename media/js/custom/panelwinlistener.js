@@ -21,8 +21,28 @@ window.addEventListener("message", (event) => {
         initTblNameStandards("tblNamingStandards", payload);
         appSettings.controlNameConventions = payload.output;
     }
+    else if (type === "setLocalSettings") {
+        if (payload) {
+            data = payload;
+            $("#envUrl").val(data.envUrl);
+            $("#solutionid").val(data.solutionid);
+        }
+    }
     else if (type === "setAppScreens") {
         initTblAppScreens("tblAppScreens", payload);
+    }
+    else if (type === "setDVConnStatus") {
+        if (payload.status === "Success") {
+            let envUrl = $("#envUrl").val().trim();
+            let solutionid = $("#solutionId").val().trim();
+            localSettings.url = envUrl;
+            localSettings.solutionid = solutionid;
+            $("#dvStatus").text("Connected to Dataverse");
+        }
+    }
+    else if (type === "setComponentList") {
+        console.log("Components received: ", payload);
+        initTblComponents("tblComponents", payload);
     }
 });
 

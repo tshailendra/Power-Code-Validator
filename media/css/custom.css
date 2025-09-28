@@ -19,9 +19,10 @@
 /*tabulator parent node*/
 /* style the whole root row by targeting its cells (higher specificity) */
 .tabulator .tabulator-row.tabulator-tree-level-0 .tabulator-cell {
-  background-color: #f1be5f !important;
+  background-color: #f6d8a1 !important;
   font-weight: 500 !important;
-  font-size: 1.1rem !important;
+  font-size: 14px !important;
+  border: 1px solid rgb(233, 233, 233);
 }
 
 /* ensure the row element itself has no competing bg */
@@ -38,4 +39,28 @@
 
 .tabulator .tabulator-col .tabulator-col-title {
   text-align: center;
+}
+
+
+/**/
+/* Dataverse selected = green */
+#dataverseOption:checked+label {
+  background-color: #198754;
+  /* Bootstrap green */
+  color: #fff;
+  border-color: #198754;
+}
+
+/* Local selected = orange */
+#localOption:checked+label {
+  background-color: #F8B740;
+  color: #fff;
+  border-color: #F8B740;
+}
+
+/* Unselected = light gray */
+.btn-check:not(:checked)+.btn {
+  background-color: #f8f9fa;
+  color: #000;
+  border-color: #ced4da;
 }

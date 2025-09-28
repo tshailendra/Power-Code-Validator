@@ -5,9 +5,9 @@
  */
 
 import * as vscode from 'vscode';
-import { getNamingStandards, saveData } from './storage';
+import { getNamingStandards, saveData } from './uploadapp';
 import * as fs from 'fs';
-import { Logger } from "./logger";
+import { Logger } from "../logger";
 
 
 export async function processFiles(context: any, panel: vscode.WebviewPanel | undefined, files: any, targetFolder: string) {

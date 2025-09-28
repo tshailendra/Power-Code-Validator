@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from "fs";
 import * as fsp from "fs/promises";
 import * as path from 'path';
-import { FileEntry } from "../interfaces/fileentry";
+import { FileEntry } from "../../interfaces/fileentry";
 const unzipper = require("unzipper");
 
 
@@ -186,7 +186,7 @@ export async function saveData(targetFolder: string, fileName: string, jsondata:
 
 }
 
-export async function readData(filePath: string): Promise<any> {
+export async function readAppData(filePath: string): Promise<any> {
     try {
         const content = await fsp.readFile(filePath, 'utf8');
         const json = JSON.parse(content);
@@ -197,6 +197,7 @@ export async function readData(filePath: string): Promise<any> {
         return '';
     }
 }
+
 
 export function getNamingStandards(context: any, defaults: boolean): any {
     const gblFolderPath = context.globalStorageUri.fsPath;

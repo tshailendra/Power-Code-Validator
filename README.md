@@ -108,7 +108,7 @@ This extension contributes the following settings:
 
 - 1.0.3
 
-  Added filter for Cotrol column in Control Details
+  Added filter for Control column in Control Details
   
 
 

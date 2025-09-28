@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { FileEntry } from "../interfaces/fileentry";
+import { FileEntry } from "../../interfaces/fileentry";
 
 export class FileStore {
   private files: FileEntry[] = [];
