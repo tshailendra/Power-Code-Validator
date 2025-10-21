@@ -178,7 +178,18 @@ function validateCodeStandards(child: any, codeStandards: any): any {
   // Ensure child has a _children array to add validation results
   child._children = child._children || [];
 
-  const code = child.script || "";
+  const tempCode = child.script || "";
+  const code = tempCode
+    // remove block comments (multiline /* ... */)
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    // remove line comments (// ...)
+    .replace(/\/\/.*$/gm, "")
+    // cleanup lines
+    .split("\n")
+    .map((line: any) => line.trim())
+    .filter((line: any) => line.length > 0)
+    .join("\n");
+
   // Split code by semicolon to process each statement
   const codeSplit = code.split(";").map((s: any) => s.trim()).filter(Boolean);
 
@@ -263,7 +274,7 @@ function validateCodeStandards(child: any, codeStandards: any): any {
     }
 
     // --- Validate Set function for global variables ---
-    const setMatch = item.match(/Set\(\s*([^,]+)\s*,/i);
+    const setMatch = item.match(/^Set\(\s*([^,]+)\s*,/);
     if (setMatch) {
       matchFound = true;
       const variable = setMatch[1].trim();

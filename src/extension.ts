@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import { Logger } from './helpers/logger';
-import { uploadMSAppFile, readAppData, getNamingStandards, saveNameStandardsData, downloadControlNameFile, uploadControlNameFile, resetNameStandards } from './helpers/canvasapp/uploadapp';
+import { uploadMSAppFile, readAppData, mergeNamingStandards, getNamingStandards, saveNameStandardsData, downloadControlNameFile, uploadControlNameFile, resetNameStandards } from './helpers/canvasapp/uploadapp';
 import { FileStore } from './helpers/canvasapp/filestore';
 import { processFiles } from './helpers/canvasapp/fileprocess';
 import { login } from './login/loginWithBrowser';
@@ -57,12 +57,26 @@ export function activate(context: vscode.ExtensionContext) {
 
 			// Load local settings if available
 			const localSettings = getLocalSettings(context);
+			let newchanges: boolean = true;
 			if (localSettings) {
+				// if attribute defined get the value
+				newchanges = localSettings.newchanges === undefined ? true : Boolean(localSettings.newchanges);
 				currentPanel?.webview.postMessage({ type: 'setLocalSettings', payload: localSettings });
 			}
+
 			// Send naming standards data to the webview
+			if(newchanges){
+				//Merge NamingStandards with new attributes. User files should exists
+				mergeNamingStandards(context);
+			}
 			const output = getNamingStandards(context, false);
 			currentPanel?.webview.postMessage({ type: 'setNameStandards', payload: output, });
+
+			try {
+				const envUrl : string = localSettings.envUrl === undefined ? "" : localSettings.envUrl;
+				const solutionid = localSettings.solutionid === undefined ? "" : localSettings.solutionid;
+				saveData(context, 'localsettings.json', { envUrl, solutionid, newchanges:false });
+			} catch (e) { }
 
 			// Handle messages received from the webview
 			currentPanel.webview.onDidReceiveMessage(
@@ -108,13 +122,13 @@ export function activate(context: vscode.ExtensionContext) {
 						currentPanel?.webview.postMessage({ type: 'setDVConnStatus', payload: data });
 						if (!accessToken.token.includes("Error")) {
 							// Fetch Dataverse tables and local storage files	
-							saveData(context, 'localsettings.json', { envUrl, solutionid });
+							saveData(context, 'localsettings.json', { envUrl, solutionid, newchanges });
 							const components = await getComponentsFromSolutions(envUrl, solutionid, accessToken.token);
 							currentPanel?.webview.postMessage({ type: 'setComponentList', payload: components, text: 'Tables fetched successfully' });
 							if (components.length === 1) {
 								//TODO: await exportSolution(context, envUrl, accessToken.token, solutionid);
 							}
-							
+
 						} else {
 							accessToken.token = "";
 						}

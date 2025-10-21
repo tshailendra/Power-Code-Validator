@@ -19,5 +19,6 @@
 {"ID": "371", "Value": "Connector", "ApiUrl": "/connectors({value})"},
 {"ID": "372", "Value": "Connector (Custom Connector)", "ApiUrl": "/connector(customconnector)s({value})"},
 {"ID": "380", "Value": "Environment Variable Value", "ApiUrl": "/environmentvariablevalues?$filter=_environmentvariabledefinitionid_value eq {value}","Columns":"&$select=environmentvariablevalueid,value,schemaname","ExpandColumns":"&$expand=EnvironmentVariableDefinitionId($select=environmentvariabledefinitionid,schemaname,displayname,description,defaultvalue)","ChildColumns":""},
-{"ID": "10129", "Value": "Connection Reference", "ApiUrl": "/connectionreferences({value})","Columns": "?$select=connectionreferenceid,connectionreferencedisplayname,description,connectionreferencelogicalname"}
+{"ID": "10129", "Value": "Connection Reference", "ApiUrl": "/connectionreferences({value})","Columns": "?$select=connectionreferenceid,connectionreferencedisplayname,description,connectionreferencelogicalname"},
+{"ID": "418","Value": "Dataflow","ApiUrl": "/dataflows({value})","Columns": "?$select=dataflowid,name","ExpandColumns": "","ChildColumns": ""}
 ]

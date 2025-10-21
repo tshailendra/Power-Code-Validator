@@ -5,6 +5,7 @@ import * as path from 'path';
 import { FileEntry } from "../../interfaces/fileentry";
 const unzipper = require("unzipper");
 
+const namingStandards = "NamingStandards.json";
 
 export async function uploadMSAppFile(context: any, sourceFilePath: string): Promise<{ files: any[]; targetFolder: string }> {
     try {
@@ -59,7 +60,6 @@ export async function uploadMSAppFile(context: any, sourceFilePath: string): Pro
     return { files: [{ "fullPath": "Unknown error", status: "Error" }], targetFolder: "" };
 }
 
-
 async function extractZipFile(context: any, sourceFilePath: string, sourceBasePath: string, fileName: string): Promise<string> {
 
     const zipFileName = path.join(sourceFilePath, sourceBasePath, fileName);
@@ -93,7 +93,6 @@ async function extractZipFile(context: any, sourceFilePath: string, sourceBasePa
     }
 }
 
-
 async function getAllFilesWithFolders(dir: string): Promise<FileEntry[]> {
     const dirents = await fsp.readdir(dir, { withFileTypes: true });
     const results: FileEntry[] = [];
@@ -118,7 +117,6 @@ async function getAllFilesWithFolders(dir: string): Promise<FileEntry[]> {
     return results;
 }
 
-
 async function getFolders(folderPath: string): Promise<string[]> {
     try {
         const entries = await fsp.readdir(folderPath, { withFileTypes: true });
@@ -128,7 +126,6 @@ async function getFolders(folderPath: string): Promise<string[]> {
         return [];
     }
 }
-
 
 async function deleteFolder(folderPath: string) {
     try {
@@ -153,7 +150,6 @@ async function deleteFolder(folderPath: string) {
     }
 }
 
-
 async function readControlCount(data: any[]) {
     for (const item of data) {
         try {
@@ -169,7 +165,6 @@ async function readControlCount(data: any[]) {
     }
     return data;
 }
-
 
 export async function saveData(targetFolder: string, fileName: string, jsondata: any): Promise<boolean> {
     try {
@@ -198,10 +193,32 @@ export async function readAppData(filePath: string): Promise<any> {
     }
 }
 
+export function mergeNamingStandards(context: any): any {
+    let appData: any = [];
+    const fileControlNamePath = vscode.Uri.file(path.join(context.extensionPath, "media", "json", "controlname.json"));
+    const raw = fs.readFileSync(fileControlNamePath.fsPath, "utf8");
+    appData = JSON.parse(raw);
+
+    const gblFolderPath = context.globalStorageUri.fsPath;
+    const filePath = path.join(gblFolderPath, namingStandards);
+    let userData: any = [];
+    if (fs.existsSync(filePath)) {
+        const raw = fs.readFileSync(filePath, "utf8");
+        userData = JSON.parse(raw);
+
+        const mergedData = appData.map((appItem: any) => {
+            const existing = userData.find((u: any) => u.ctrl === appItem.ctrl);
+            return existing ?? appItem;
+        });
+
+        saveNameStandardsData(context, mergedData);
+    }
+
+}
 
 export function getNamingStandards(context: any, defaults: boolean): any {
     const gblFolderPath = context.globalStorageUri.fsPath;
-    const filePath = path.join(gblFolderPath, "NamingStandards.json");
+    const filePath = path.join(gblFolderPath, namingStandards);
     let data = [];
     let fileLastUpdate = "Default Settings";
 
@@ -261,7 +278,7 @@ export function getNamingStandards(context: any, defaults: boolean): any {
 export async function resetNameStandards(context: any): Promise<boolean> {
     try {
         const gblFolderPath = context.globalStorageUri.fsPath;
-        const filePath = path.join(gblFolderPath, "NamingStandards.json");
+        const filePath = path.join(gblFolderPath, namingStandards);
 
         // Load default naming standards from extension media folder
         const fileControlNamePath = vscode.Uri.file(path.join(context.extensionPath, "media", "json", "controlname.json"));
@@ -287,7 +304,7 @@ export async function resetNameStandards(context: any): Promise<boolean> {
 export async function saveNameStandardsData(context: any, jsondata: any): Promise<boolean> {
     try {
         const gblFolderPath = context.globalStorageUri.fsPath;
-        const filePath = path.join(gblFolderPath, "NamingStandards.json");
+        const filePath = path.join(gblFolderPath, namingStandards);
         await fsp.mkdir(gblFolderPath, { recursive: true });
         await fsp.writeFile(filePath, JSON.stringify(jsondata, null, 2), "utf8");
     }

@@ -6,6 +6,7 @@
   {"display": "Data table", "ctrl": "dataTable", "prefix": "dtb", "parent": "Classic"},
   {"display": "Date picker", "ctrl": "datepicker", "prefix": "dtp", "parent": "Classic"},
   {"display": "Edit form", "ctrl": "form", "prefix": "frm", "parent": "Classic"},
+  {"display": "Attachment", "ctrl": "attachments", "prefix": "att", "parent": "Classic"},
   {"display": "Display form", "ctrl": "formViewer", "prefix": "frv", "parent": "Classic"},
   {"display": "Gallery", "ctrl": "gallery", "prefix": "gal", "parent": "Classic"},
   {"display": "Group", "ctrl": "group", "prefix": "grp", "parent": "Classic"},
